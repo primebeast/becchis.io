@@ -196,11 +196,68 @@
     position: absolute;
     inset: 0;
     z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+  .slide-text {
+    padding: 0 6vw 0 10vw;
     display: flex;
     flex-direction: column;
+  }
+  .slide-visual {
+    display: flex;
+    align-items: center;
     justify-content: center;
-    padding: 0 10vw;
-    max-width: 860px;
+    height: 100%;
+    padding: 60px 8vw 60px 4vw;
+    position: relative;
+  }
+  .slide-stat-box {
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(8px);
+    padding: 36px 40px;
+    text-align: center;
+    width: 100%;
+    max-width: 340px;
+  }
+  .slide-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .slide-stat-label {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 24px;
+  }
+  .slide-stat-items {
+    list-style: none;
+    text-align: left;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 20px;
+  }
+  .slide-stat-items li {
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .slide-stat-items li span.dot-icon {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: inline-block;
+    flex-shrink: 0;
   }
   .slide-tag {
     font-size: 11px;
@@ -564,10 +621,7 @@
     font-weight: 300;
     margin-bottom: 40px;
   }
-  .feature-points {
-    list-style: none;
-    margin-bottom: 40px;
-  }
+  .feature-points { list-style: none; margin-bottom: 40px; }
   .feature-points li {
     font-size: 13.5px;
     color: rgba(255,255,255,0.75);
@@ -583,6 +637,26 @@
     border-radius: 50%;
     background: var(--green);
     flex-shrink: 0;
+  }
+  /* Academy section bullets — dark text on light bg */
+  .academy-points { list-style: none; margin-bottom: 32px; }
+  .academy-points li {
+    font-size: 14px;
+    color: #1a1a1a;
+    padding: 11px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .academy-points li .dot-bullet {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #1a6b3a;
+    display: inline-block;
+    flex-shrink: 0;
+  }
   }
   .btn-gold {
     display: inline-flex;
@@ -963,12 +1037,25 @@
     </div>
     <div class="slide-overlay"></div>
     <div class="slide-content">
-      <p class="slide-tag">Since 2007 — Made in Italy</p>
-      <h1 class="slide-title">Technology & Beauty<br>in <strong>Perfect Balance</strong></h1>
-      <p class="slide-sub">We dedicate maximum attention to those who choose us, with transparency, support, and quality.</p>
-      <div class="slide-actions">
-        <a href="#" class="btn-hero btn-hero-primary">Discover Who We Are &rarr;</a>
-        <a href="#technologies" class="btn-hero">Our Technologies</a>
+      <div class="slide-text">
+        <p class="slide-tag">Since 2007 — Made in Italy</p>
+        <h1 class="slide-title">Technology & Beauty<br>in <strong>Perfect Balance</strong></h1>
+        <p class="slide-sub">We dedicate maximum attention to those who choose us, with transparency, support, and quality.</p>
+        <div class="slide-actions">
+          <a href="#" class="btn-hero btn-hero-primary">Discover Who We Are &rarr;</a>
+          <a href="#technologies" class="btn-hero">Our Technologies</a>
+        </div>
+      </div>
+      <div class="slide-visual">
+        <div class="slide-stat-box">
+          <div class="slide-stat-num">17+</div>
+          <div class="slide-stat-label">Years of Excellence</div>
+          <ul class="slide-stat-items">
+            <li><span class="dot-icon"></span>Professional Technologies</li>
+            <li><span class="dot-icon"></span>Made in Italy</li>
+            <li><span class="dot-icon"></span>Certified & Patented</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -979,11 +1066,24 @@
     </div>
     <div class="slide-overlay"></div>
     <div class="slide-content">
-      <p class="slide-tag">Flagship Technology</p>
-      <h1 class="slide-title">The Excellence of<br><strong>Non-Invasive Slimming</strong></h1>
-      <p class="slide-sub">Unique in the world — Fisikcelluderm reproduces the real effectiveness of manual massage.</p>
-      <div class="slide-actions">
-        <a href="#" class="btn-hero btn-hero-primary">Discover Fisikcelluderm &rarr;</a>
+      <div class="slide-text">
+        <p class="slide-tag">Flagship Technology</p>
+        <h1 class="slide-title">The Excellence of<br><strong>Non-Invasive Slimming</strong></h1>
+        <p class="slide-sub">Unique in the world — Fisikcelluderm reproduces the real effectiveness of manual massage.</p>
+        <div class="slide-actions">
+          <a href="#" class="btn-hero btn-hero-primary">Discover Fisikcelluderm &rarr;</a>
+        </div>
+      </div>
+      <div class="slide-visual">
+        <div class="slide-stat-box">
+          <div class="slide-stat-num">01</div>
+          <div class="slide-stat-label">Unique in the World</div>
+          <ul class="slide-stat-items">
+            <li><span class="dot-icon"></span>Mechanical deep massage</li>
+            <li><span class="dot-icon"></span>Fully autonomous operation</li>
+            <li><span class="dot-icon"></span>Clinically proven results</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -994,12 +1094,25 @@
     </div>
     <div class="slide-overlay"></div>
     <div class="slide-content">
-      <p class="slide-tag">Professional Solutions</p>
-      <h1 class="slide-title">The Future of<br><strong>Professional Aesthetics</strong></h1>
-      <p class="slide-sub">Results, reliability, innovation — the principles that inspire every one of our technologies.</p>
-      <div class="slide-actions">
-        <a href="#technologies" class="btn-hero btn-hero-primary">See All Technologies &rarr;</a>
-        <a href="#contact" class="btn-hero">Contact Us</a>
+      <div class="slide-text">
+        <p class="slide-tag">Professional Solutions</p>
+        <h1 class="slide-title">The Future of<br><strong>Professional Aesthetics</strong></h1>
+        <p class="slide-sub">Results, reliability, innovation — the principles that inspire every one of our technologies.</p>
+        <div class="slide-actions">
+          <a href="#technologies" class="btn-hero btn-hero-primary">See All Technologies &rarr;</a>
+          <a href="#contact" class="btn-hero">Contact Us</a>
+        </div>
+      </div>
+      <div class="slide-visual">
+        <div class="slide-stat-box">
+          <div class="slide-stat-num">9</div>
+          <div class="slide-stat-label">Professional Technologies</div>
+          <ul class="slide-stat-items">
+            <li><span class="dot-icon"></span>Laser & Radiofrequency</li>
+            <li><span class="dot-icon"></span>Pressotherapy Systems</li>
+            <li><span class="dot-icon"></span>Franchising Network</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -1157,10 +1270,10 @@
     <p class="section-label">Professional Training</p>
     <h2 class="section-title" style="margin-bottom:20px">Learning, Updating,<br>Growing</h2>
     <p class="intro-body" style="margin-bottom:28px">A path that never stops. The Becchis Line Beauty Care and Technologies academy provides advanced training on all our technologies — from slimming methods to laser treatments — with practical sessions and professional certification.</p>
-    <ul class="feature-points" style="margin-bottom: 32px;">
-      <li>Advanced hands-on technology training</li>
-      <li>Certified professional qualification</li>
-      <li>Ongoing updates & new techniques</li>
+    <ul class="academy-points">
+      <li><span class="dot-bullet"></span>Advanced hands-on technology training</li>
+      <li><span class="dot-bullet"></span>Certified professional qualification</li>
+      <li><span class="dot-bullet"></span>Ongoing updates & new techniques</li>
     </ul>
     <a href="#" class="btn-green">Explore Training Courses &rarr;</a>
   </div>
