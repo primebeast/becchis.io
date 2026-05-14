@@ -163,6 +163,7 @@
     height: 92vh;
     min-height: 600px;
     overflow: hidden;
+    background: #0a1a10;
   }
   .slide {
     position: absolute;
@@ -171,14 +172,30 @@
     transition: opacity 1s ease;
   }
   .slide.active { opacity: 1; }
+  .slide-bg-wrap {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
   .slide-bg {
     width: 100%; height: 100%;
     object-fit: cover;
-    filter: brightness(0.5);
+    display: block;
+  }
+  .slide-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, rgba(5,20,10,0.88) 0%, rgba(5,20,10,0.65) 50%, rgba(5,20,10,0.45) 100%);
+  }
+  .slide-fallback {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0a1f12 0%, #122b1c 40%, #0d2318 100%);
   }
   .slide-content {
     position: absolute;
     inset: 0;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -192,16 +209,18 @@
     color: var(--gold);
     margin-bottom: 20px;
     font-family: 'DM Sans', sans-serif;
-    font-weight: 400;
+    font-weight: 500;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
   .slide-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(44px, 5.5vw, 76px);
     font-weight: 300;
-    color: white;
+    color: #ffffff;
     line-height: 1.1;
     margin-bottom: 20px;
     letter-spacing: -0.01em;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
   }
   .slide-title strong {
     font-weight: 600;
@@ -210,11 +229,12 @@
   }
   .slide-sub {
     font-size: 16px;
-    color: rgba(255,255,255,0.75);
+    color: rgba(255,255,255,0.92);
     font-weight: 300;
     margin-bottom: 36px;
     max-width: 480px;
     line-height: 1.7;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.6);
   }
   .btn-hero {
     display: inline-flex;
@@ -937,7 +957,11 @@
 <!-- HERO SLIDER -->
 <section class="hero">
   <div class="slide active" id="slide-0">
-    <img class="slide-bg" src="https://www.becchisline.com/wp-content/uploads/2025/12/Slid-1.jpg" alt="Technology and Beauty">
+    <div class="slide-fallback"></div>
+    <div class="slide-bg-wrap">
+      <img class="slide-bg" src="https://www.becchisline.com/wp-content/uploads/2025/12/Slid-1.jpg" alt="Technology and Beauty" onerror="this.parentElement.style.display='none'">
+    </div>
+    <div class="slide-overlay"></div>
     <div class="slide-content">
       <p class="slide-tag">Since 2007 — Made in Italy</p>
       <h1 class="slide-title">Technology & Beauty<br>in <strong>Perfect Balance</strong></h1>
@@ -949,7 +973,11 @@
     </div>
   </div>
   <div class="slide" id="slide-1">
-    <img class="slide-bg" src="https://www.becchisline.com/wp-content/uploads/slider/cache/1a825bddb0cf80ba838cdeb22d143b1b/Slid-2.jpg" alt="Fisikcelluderm">
+    <div class="slide-fallback" style="background: linear-gradient(135deg, #0f1a2e 0%, #1a2a40 100%);"></div>
+    <div class="slide-bg-wrap">
+      <img class="slide-bg" src="https://www.becchisline.com/wp-content/uploads/slider/cache/1a825bddb0cf80ba838cdeb22d143b1b/Slid-2.jpg" alt="Fisikcelluderm" onerror="this.parentElement.style.display='none'">
+    </div>
+    <div class="slide-overlay"></div>
     <div class="slide-content">
       <p class="slide-tag">Flagship Technology</p>
       <h1 class="slide-title">The Excellence of<br><strong>Non-Invasive Slimming</strong></h1>
@@ -960,7 +988,11 @@
     </div>
   </div>
   <div class="slide" id="slide-2">
-    <img class="slide-bg" src="https://www.becchisline.com/wp-content/uploads/2025/12/Slide-3.jpg" alt="Professional Solutions">
+    <div class="slide-fallback" style="background: linear-gradient(135deg, #1a0a14 0%, #2e1020 100%);"></div>
+    <div class="slide-bg-wrap">
+      <img class="slide-bg" src="https://www.becchisline.com/wp-content/uploads/2025/12/Slide-3.jpg" alt="Professional Solutions" onerror="this.parentElement.style.display='none'">
+    </div>
+    <div class="slide-overlay"></div>
     <div class="slide-content">
       <p class="slide-tag">Professional Solutions</p>
       <h1 class="slide-title">The Future of<br><strong>Professional Aesthetics</strong></h1>
