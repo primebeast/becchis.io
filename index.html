@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Becchis Line — Professional Weight Loss Technologies</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0e0e0e;
+    --white: #fafaf8;
+    --cream: #f5f2ed;
+    --green: #1a6b3a;
+    --green-light: #e8f4ed;
+    --red: #b5001e;
+    --red-light: #fceaed;
+    --gold: #c9a84c;
+    --text: #1a1a1a;
+    --muted: #6b6b6b;
+    --border: rgba(0,0,0,0.1);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* TOPBAR */
+  .topbar {
+    background: var(--black);
+    color: rgba(255,255,255,0.7);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    padding: 8px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .topbar a { color: inherit; text-decoration: none; }
+  .topbar-social { display: flex; gap: 16px; }
+  .topbar-social a { opacity: 0.7; transition: opacity 0.2s; }
+  .topbar-social a:hover { opacity: 1; }
+  .topbar-right { display: flex; gap: 24px; align-items: center; }
+
+  /* NAVBAR */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250,250,248,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+  .nav-logo img { height: 38px; }
+  .nav-links {
+    display: flex;
+    gap: 0;
+    list-style: none;
+    height: 100%;
+    align-items: stretch;
+  }
+  .nav-links > li {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+  }
+  .nav-links > li > a {
+    display: flex;
+    align-items: center;
+    padding: 0 18px;
+    font-size: 13.5px;
+    font-weight: 400;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+    position: relative;
+    white-space: nowrap;
+  }
+  .nav-links > li > a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 18px; right: 18px;
+    height: 2px;
+    background: var(--green);
+    transform: scaleX(0);
+    transition: transform 0.25s ease;
+  }
+  .nav-links > li > a:hover { color: var(--green); }
+  .nav-links > li > a:hover::after { transform: scaleX(1); }
+  .nav-links > li > a .chevron {
+    display: inline-block;
+    margin-left: 4px;
+    font-size: 10px;
+    opacity: 0.5;
+    transition: transform 0.2s;
+  }
+  .nav-links > li:hover > a .chevron { transform: rotate(180deg); }
+
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 240px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--green);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: all 0.22s ease;
+    z-index: 200;
+  }
+  .nav-links > li:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .dropdown a {
+    display: block;
+    padding: 11px 20px;
+    font-size: 13px;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s, color 0.15s;
+    letter-spacing: 0.02em;
+  }
+  .dropdown a:last-child { border-bottom: none; }
+  .dropdown a:hover { background: var(--green-light); color: var(--green); }
+
+  .nav-actions { display: flex; gap: 12px; align-items: center; }
+  .btn-shop {
+    background: var(--green);
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 9px 22px;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-shop:hover { background: #145530; transform: translateY(-1px); }
+  .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+  .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text); margin: 5px 0; transition: all 0.3s; }
+
+  /* HERO SLIDER */
+  .hero {
+    position: relative;
+    height: 92vh;
+    min-height: 600px;
+    overflow: hidden;
+  }
+  .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  .slide.active { opacity: 1; }
+  .slide-bg {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.5);
+  }
+  .slide-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 10vw;
+    max-width: 860px;
+  }
+  .slide-tag {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+  }
+  .slide-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(44px, 5.5vw, 76px);
+    font-weight: 300;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+  .slide-title strong {
+    font-weight: 600;
+    font-style: italic;
+    color: var(--gold);
+  }
+  .slide-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.75);
+    font-weight: 300;
+    margin-bottom: 36px;
+    max-width: 480px;
+    line-height: 1.7;
+  }
+  .btn-hero {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.5);
+    color: white;
+    font-size: 12.5px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    text-decoration: none;
+    transition: background 0.25s, border-color 0.25s;
+    width: fit-content;
+  }
+  .btn-hero:hover { background: rgba(255,255,255,0.12); border-color: white; }
+  .btn-hero-primary {
+    background: var(--green);
+    border-color: var(--green);
+    color: white;
+  }
+  .btn-hero-primary:hover { background: #145530; border-color: #145530; }
+  .slide-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .slider-controls {
+    position: absolute;
+    bottom: 36px;
+    left: 10vw;
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+    align-items: center;
+  }
+  .dot {
+    width: 28px;
+    height: 2px;
+    background: rgba(255,255,255,0.35);
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+  }
+  .dot.active { background: white; width: 52px; }
+  .slider-arrows {
+    position: absolute;
+    bottom: 28px;
+    right: 48px;
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+  }
+  .arrow-btn {
+    width: 44px; height: 44px;
+    border: 1px solid rgba(255,255,255,0.4);
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .arrow-btn:hover { background: rgba(255,255,255,0.15); }
+
+  /* MARQUEE STRIP */
+  .marquee-strip {
+    background: var(--green);
+    color: white;
+    padding: 14px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-inner {
+    display: inline-flex;
+    gap: 0;
+    animation: marquee 22s linear infinite;
+  }
+  .marquee-item {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 400;
+    padding: 0 40px;
+    border-right: 1px solid rgba(255,255,255,0.3);
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* INTRO SECTION */
+  .intro {
+    padding: 100px 10vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .intro-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green);
+    font-weight: 500;
+    margin-bottom: 18px;
+  }
+  .intro-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 3.5vw, 52px);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+  .intro-title em { font-style: italic; color: var(--green); }
+  .intro-body {
+    font-size: 15.5px;
+    line-height: 1.8;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 32px;
+  }
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--text);
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { background: var(--text); color: white; }
+  .intro-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+  .stat-card {
+    background: var(--cream);
+    padding: 36px 28px;
+    position: relative;
+  }
+  .stat-card:nth-child(2) { background: var(--green); }
+  .stat-card:nth-child(2) .stat-num, .stat-card:nth-child(2) .stat-label { color: white; }
+  .stat-card:nth-child(2) .stat-sub { color: rgba(255,255,255,0.7); }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .stat-sub { font-size: 13px; color: var(--muted); }
+
+  /* TECHNOLOGIES GRID */
+  .tech-section {
+    background: var(--cream);
+    padding: 100px 10vw;
+  }
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 60px;
+  }
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green);
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 3vw, 46px);
+    font-weight: 300;
+    line-height: 1.2;
+  }
+  .section-sub { font-size: 14.5px; color: var(--muted); max-width: 340px; line-height: 1.6; }
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+  .tech-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 0.75;
+    cursor: pointer;
+    group: true;
+  }
+  .tech-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    filter: brightness(0.65);
+  }
+  .tech-card:hover img { transform: scale(1.07); filter: brightness(0.4); }
+  .tech-card-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 28px 22px;
+  }
+  .tech-card-tag {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .tech-card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .tech-card-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0);
+    line-height: 1.5;
+    transition: color 0.3s;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, color 0.3s;
+  }
+  .tech-card:hover .tech-card-desc { color: rgba(255,255,255,0.8); max-height: 80px; }
+  .tech-card-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+    margin-top: 14px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .tech-card:hover .tech-card-arrow { opacity: 1; transform: translateY(0); }
+  .tech-card-accent {
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--green);
+    transition: height 0.4s ease;
+  }
+  .tech-card:hover .tech-card-accent { height: 100%; }
+
+  /* FISIKCELLUDERM FEATURE */
+  .feature-section {
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 580px;
+  }
+  .feature-image {
+    position: relative;
+    overflow: hidden;
+  }
+  .feature-image img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .feature-badge {
+    position: absolute;
+    top: 40px; right: -1px;
+    background: var(--red);
+    color: white;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 8px 18px;
+  }
+  .feature-content {
+    background: var(--black);
+    padding: 80px 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .feature-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .feature-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 3.2vw, 52px);
+    font-weight: 300;
+    color: white;
+    line-height: 1.15;
+    margin-bottom: 24px;
+  }
+  .feature-title em { font-style: italic; color: var(--gold); }
+  .feature-body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+    margin-bottom: 40px;
+  }
+  .feature-points {
+    list-style: none;
+    margin-bottom: 40px;
+  }
+  .feature-points li {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.75);
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .feature-points li::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    flex-shrink: 0;
+  }
+  .btn-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gold);
+    color: var(--black);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+    width: fit-content;
+  }
+  .btn-gold:hover { opacity: 0.88; }
+
+  /* ACADEMY SECTION */
+  .academy-section {
+    padding: 100px 10vw;
+    display: grid;
+    grid-template-columns: 5fr 4fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .academy-image {
+    position: relative;
+    overflow: hidden;
+    border-top: 4px solid var(--green);
+  }
+  .academy-image img { width: 100%; display: block; }
+  .academy-image-label {
+    position: absolute;
+    top: 20px; left: 0;
+    background: var(--green);
+    color: white;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 7px 16px;
+  }
+  .btn-green {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--green);
+    color: white;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    text-decoration: none;
+    transition: background 0.2s;
+    width: fit-content;
+  }
+  .btn-green:hover { background: #145530; }
+
+  /* FRANCHISING CTA */
+  .franchising-cta {
+    background: var(--cream);
+    padding: 80px 10vw;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 60px;
+    align-items: center;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .franchising-cta-tag {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 14px;
+  }
+  .franchising-cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(30px, 3vw, 44px);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .franchising-cta-sub { font-size: 15px; color: var(--muted); font-weight: 300; line-height: 1.7; }
+  .btn-red {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--red);
+    color: white;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    text-decoration: none;
+    transition: background 0.2s;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  .btn-red:hover { background: #8a0017; }
+
+  /* NEWSLETTER */
+  .newsletter {
+    background: var(--black);
+    padding: 80px 10vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .newsletter-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .newsletter-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 2.5vw, 40px);
+    font-weight: 300;
+    color: white;
+    line-height: 1.25;
+  }
+  .newsletter-sub { font-size: 14.5px; color: rgba(255,255,255,0.5); line-height: 1.7; margin-top: 12px; }
+  .newsletter-form { display: flex; gap: 0; }
+  .newsletter-input {
+    flex: 1;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-right: none;
+    color: white;
+    font-size: 14px;
+    padding: 14px 20px;
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .newsletter-input::placeholder { color: rgba(255,255,255,0.35); }
+  .newsletter-input:focus { border-color: var(--gold); }
+  .newsletter-btn {
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: opacity 0.2s;
+  }
+  .newsletter-btn:hover { opacity: 0.88; }
+
+  /* CONTACT SECTION */
+  .contact-section {
+    padding: 100px 10vw;
+    display: grid;
+    grid-template-columns: 4fr 5fr;
+    gap: 80px;
+  }
+  .contact-info { }
+  .contact-detail {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+  .contact-icon {
+    width: 40px; height: 40px;
+    background: var(--green-light);
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .contact-detail-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .contact-detail-value { font-size: 15px; color: var(--text); }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label { font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .form-input {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 14.5px;
+    padding: 12px 16px;
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+    border-radius: 0;
+  }
+  .form-input:focus { border-color: var(--green); background: white; }
+  textarea.form-input { resize: vertical; min-height: 120px; }
+  .btn-submit {
+    background: var(--green);
+    color: white;
+    border: none;
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 15px 36px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.2s;
+    align-self: flex-start;
+    margin-top: 8px;
+  }
+  .btn-submit:hover { background: #145530; }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    color: rgba(255,255,255,0.65);
+    padding: 72px 10vw 0;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .footer-logo { margin-bottom: 20px; filter: brightness(10); height: 32px; }
+  .footer-desc { font-size: 13.5px; line-height: 1.75; color: rgba(255,255,255,0.45); margin-bottom: 24px; }
+  .footer-social { display: flex; gap: 12px; }
+  .footer-social a {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    font-size: 15px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .footer-social a:hover { border-color: var(--green); color: var(--green); }
+  .footer-col-title {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul a {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    transition: color 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .footer-col ul a:hover { color: rgba(255,255,255,0.9); }
+  .footer-bottom {
+    padding: 22px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+  }
+  .footer-bottom-links { display: flex; gap: 24px; }
+  .footer-bottom-links a { color: inherit; text-decoration: none; }
+  .footer-bottom-links a:hover { color: rgba(255,255,255,0.6); }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* MOBILE */
+  @media (max-width: 1024px) {
+    nav { padding: 0 24px; }
+    .topbar { padding: 8px 24px; }
+    .intro { padding: 70px 6vw; gap: 48px; }
+    .tech-section { padding: 70px 6vw; }
+    .tech-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .topbar { display: none; }
+    .nav-links, .nav-actions { display: none; }
+    .hamburger { display: block; }
+    .intro { grid-template-columns: 1fr; padding: 56px 5vw; }
+    .intro-stats { display: none; }
+    .feature-section { grid-template-columns: 1fr; }
+    .feature-content { padding: 48px 5vw; }
+    .academy-section { grid-template-columns: 1fr; padding: 60px 5vw; }
+    .franchising-cta { grid-template-columns: 1fr; padding: 56px 5vw; }
+    .newsletter { grid-template-columns: 1fr; padding: 60px 5vw; }
+    .contact-section { grid-template-columns: 1fr; padding: 60px 5vw; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; padding: 40px 0; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+    footer { padding: 48px 5vw 0; }
+    .tech-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">Via Sommariva 31/1, 10022 Carmagnola (TO) — +39 0119710730</div>
+  <div class="topbar-right">
+    <div class="topbar-social">
+      <a href="https://www.facebook.com/BecchisLine" target="_blank" title="Facebook">&#xfb;</a>
+      <a href="https://www.instagram.com/becchis_line/" target="_blank" title="Instagram">&#x229;</a>
+      <a href="https://www.youtube.com/channel/UC35PEgXb49swmjRVcl8fCeQ" target="_blank" title="YouTube">&#x25b6;</a>
+    </div>
+    <span>EN | IT | ES</span>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="https://www.becchisline.com/wp-content/uploads/2025/10/logo-nuovo-becchis-line-1-225x42.png" alt="Becchis Line">
+  </a>
+  <ul class="nav-links">
+    <li>
+      <a href="#">Fisikcelluderm</a>
+    </li>
+    <li>
+      <a href="#">Technologies <span class="chevron">▾</span></a>
+      <div class="dropdown">
+        <a href="#">SANYSAUN</a>
+        <a href="#">Body Therm Bands</a>
+        <a href="#">Pressotherapy</a>
+        <a href="#">Pressotherapy 2 in 1</a>
+        <a href="#">Diode Laser 808 nm</a>
+        <a href="#">Diode Laser 3 Waves</a>
+        <a href="#">Radiofrequency</a>
+        <a href="#">Fisikcelluderm Home</a>
+        <a href="#">Vacuum</a>
+      </div>
+    </li>
+    <li>
+      <a href="#">Franchising <span class="chevron">▾</span></a>
+      <div class="dropdown">
+        <a href="#">The Slimming Method</a>
+        <a href="#">Advantages & Support</a>
+        <a href="#">Conditions</a>
+      </div>
+    </li>
+    <li><a href="#">Company</a></li>
+    <li><a href="#">BL Academy</a></li>
+    <li><a href="#">Contacts</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="#" class="btn-shop">Shop</a>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO SLIDER -->
+<section class="hero">
+  <div class="slide active" id="slide-0">
+    <img class="slide-bg" src="https://www.becchisline.com/wp-content/uploads/2025/12/Slid-1.jpg" alt="Technology and Beauty">
+    <div class="slide-content">
+      <p class="slide-tag">Since 2007 — Made in Italy</p>
+      <h1 class="slide-title">Technology & Beauty<br>in <strong>Perfect Balance</strong></h1>
+      <p class="slide-sub">We dedicate maximum attention to those who choose us, with transparency, support, and quality.</p>
+      <div class="slide-actions">
+        <a href="#" class="btn-hero btn-hero-primary">Discover Who We Are &rarr;</a>
+        <a href="#technologies" class="btn-hero">Our Technologies</a>
+      </div>
+    </div>
+  </div>
+  <div class="slide" id="slide-1">
+    <img class="slide-bg" src="https://www.becchisline.com/wp-content/uploads/slider/cache/1a825bddb0cf80ba838cdeb22d143b1b/Slid-2.jpg" alt="Fisikcelluderm">
+    <div class="slide-content">
+      <p class="slide-tag">Flagship Technology</p>
+      <h1 class="slide-title">The Excellence of<br><strong>Non-Invasive Slimming</strong></h1>
+      <p class="slide-sub">Unique in the world — Fisikcelluderm reproduces the real effectiveness of manual massage.</p>
+      <div class="slide-actions">
+        <a href="#" class="btn-hero btn-hero-primary">Discover Fisikcelluderm &rarr;</a>
+      </div>
+    </div>
+  </div>
+  <div class="slide" id="slide-2">
+    <img class="slide-bg" src="https://www.becchisline.com/wp-content/uploads/2025/12/Slide-3.jpg" alt="Professional Solutions">
+    <div class="slide-content">
+      <p class="slide-tag">Professional Solutions</p>
+      <h1 class="slide-title">The Future of<br><strong>Professional Aesthetics</strong></h1>
+      <p class="slide-sub">Results, reliability, innovation — the principles that inspire every one of our technologies.</p>
+      <div class="slide-actions">
+        <a href="#technologies" class="btn-hero btn-hero-primary">See All Technologies &rarr;</a>
+        <a href="#contact" class="btn-hero">Contact Us</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="slider-controls" id="slider-dots">
+    <button class="dot active" onclick="goToSlide(0)"></button>
+    <button class="dot" onclick="goToSlide(1)"></button>
+    <button class="dot" onclick="goToSlide(2)"></button>
+  </div>
+  <div class="slider-arrows">
+    <button class="arrow-btn" onclick="prevSlide()">&#8592;</button>
+    <button class="arrow-btn" onclick="nextSlide()">&#8594;</button>
+  </div>
+</section>
+
+<!-- MARQUEE STRIP -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span class="marquee-item">Professional Technologies</span>
+    <span class="marquee-item">Non-Invasive Slimming</span>
+    <span class="marquee-item">Diode Laser</span>
+    <span class="marquee-item">Radiofrequency</span>
+    <span class="marquee-item">Fisikcelluderm</span>
+    <span class="marquee-item">Pressotherapy</span>
+    <span class="marquee-item">BL Academy</span>
+    <span class="marquee-item">Franchising</span>
+    <span class="marquee-item">Made in Italy</span>
+    <span class="marquee-item">Professional Technologies</span>
+    <span class="marquee-item">Non-Invasive Slimming</span>
+    <span class="marquee-item">Diode Laser</span>
+    <span class="marquee-item">Radiofrequency</span>
+    <span class="marquee-item">Fisikcelluderm</span>
+    <span class="marquee-item">Pressotherapy</span>
+    <span class="marquee-item">BL Academy</span>
+    <span class="marquee-item">Franchising</span>
+    <span class="marquee-item">Made in Italy</span>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="fade-up">
+    <p class="intro-label">About Becchis Line</p>
+    <h2 class="intro-title">Designing <em>Innovation</em> for Professional Aesthetics</h2>
+    <p class="intro-body">Founded in 2007 by Luigi Becchis, Becchis Line unites experience and innovation in wellness and aesthetics. We design and manufacture professional technologies for slimming and beauty, with a constant focus on quality, results, and reliability — supporting beauty centers across Italy and beyond.</p>
+    <a href="#" class="btn-outline">Discover Our Story &rarr;</a>
+  </div>
+  <div class="intro-stats fade-up" style="transition-delay: 0.15s">
+    <div class="stat-card">
+      <div class="stat-num">17+</div>
+      <div class="stat-label">Years of Excellence</div>
+      <div class="stat-sub">Established 2007</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">9</div>
+      <div class="stat-label">Core Technologies</div>
+      <div class="stat-sub">Patented & certified</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Non-Invasive</div>
+      <div class="stat-sub">Safe, effective results</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Languages</div>
+      <div class="stat-sub">IT · EN · ES</div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNOLOGIES GRID -->
+<section class="tech-section" id="technologies">
+  <div class="section-header fade-up">
+    <div>
+      <p class="section-label">Our Portfolio</p>
+      <h2 class="section-title">Becchis Line Technologies</h2>
+    </div>
+    <p class="section-sub">Innovation, design, and results at the service of professional aesthetics.</p>
+  </div>
+  <div class="tech-grid">
+    <div class="tech-card fade-up">
+      <div class="tech-card-accent"></div>
+      <img src="https://www.becchisline.com/wp-content/uploads/2026/03/Fisik-en.jpg" alt="Fisikcelluderm" loading="lazy">
+      <div class="tech-card-content">
+        <p class="tech-card-tag">Signature</p>
+        <h3 class="tech-card-name">Fisikcelluderm</h3>
+        <p class="tech-card-desc">The only technology reproducing the real effectiveness of manual massage for non-invasive slimming.</p>
+        <a href="#" class="tech-card-arrow">Discover &rarr;</a>
+      </div>
+    </div>
+    <div class="tech-card fade-up" style="transition-delay:0.08s">
+      <div class="tech-card-accent"></div>
+      <img src="https://www.becchisline.com/wp-content/uploads/2026/03/Cocoon-EN.jpg" alt="Pressotherapy" loading="lazy">
+      <div class="tech-card-content">
+        <p class="tech-card-tag">Infrared</p>
+        <h3 class="tech-card-name">Pressotherapy 2 in 1</h3>
+        <p class="tech-card-desc">Professional infrared pressotherapy combining two powerful slimming technologies in one.</p>
+        <a href="#" class="tech-card-arrow">Discover &rarr;</a>
+      </div>
+    </div>
+    <div class="tech-card fade-up" style="transition-delay:0.16s">
+      <div class="tech-card-accent"></div>
+      <img src="https://www.becchisline.com/wp-content/uploads/2026/03/laser-EN.jpg" alt="Diode Laser" loading="lazy">
+      <div class="tech-card-content">
+        <p class="tech-card-tag">Precision</p>
+        <h3 class="tech-card-name">Diode Laser</h3>
+        <p class="tech-card-desc">Permanent hair removal with 808 nm and 3-wave diode laser technology for all skin types.</p>
+        <a href="#" class="tech-card-arrow">Discover &rarr;</a>
+      </div>
+    </div>
+    <div class="tech-card fade-up" style="transition-delay:0.24s">
+      <div class="tech-card-accent"></div>
+      <img src="https://www.becchisline.com/wp-content/uploads/2026/03/RADIO-EN.jpg" alt="Radiofrequency" loading="lazy">
+      <div class="tech-card-content">
+        <p class="tech-card-tag">Body & Face</p>
+        <h3 class="tech-card-name">Radiofrequency</h3>
+        <p class="tech-card-desc">Advanced body and facial radiofrequency for skin tightening and deep tissue rejuvenation.</p>
+        <a href="#" class="tech-card-arrow">Discover &rarr;</a>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top: 48px;">
+    <a href="#" class="btn-outline">View All Technologies &rarr;</a>
+  </div>
+</section>
+
+<!-- FISIKCELLUDERM FEATURE -->
+<section class="feature-section">
+  <div class="feature-image">
+    <img src="https://www.becchisline.com/wp-content/uploads/2026/03/Fisik-en.jpg" alt="Fisikcelluderm Technology" loading="lazy">
+    <div class="feature-badge">Unique in the World</div>
+  </div>
+  <div class="feature-content">
+    <p class="feature-label">Flagship Technology</p>
+    <h2 class="feature-title">Fisikcelluderm —<br><em>Redefining</em> the Massage</h2>
+    <p class="feature-body">The patented Fisikcelluderm system is the only professional technology that mechanically reproduces — and surpasses — the effectiveness of manual massage. It operates autonomously, without requiring the therapist's continuous presence during the session.</p>
+    <ul class="feature-points">
+      <li>Increases metabolism for accelerated fat burning</li>
+      <li>Effectively resolves cellulite blemishes</li>
+      <li>Fully autonomous operation during session</li>
+      <li>Clinically proven results</li>
+    </ul>
+    <a href="#" class="btn-gold">Discover Fisikcelluderm &rarr;</a>
+  </div>
+</section>
+
+<!-- BL ACADEMY -->
+<section class="academy-section">
+  <div class="academy-image fade-up">
+    <img src="https://www.becchisline.com/wp-content/uploads/2026/03/Slide-3-1024x683.jpg" alt="BL Academy" loading="lazy">
+    <div class="academy-image-label">BL Academy</div>
+  </div>
+  <div class="fade-up" style="transition-delay:0.12s">
+    <p class="section-label">Professional Training</p>
+    <h2 class="section-title" style="margin-bottom:20px">Learning, Updating,<br>Growing</h2>
+    <p class="intro-body" style="margin-bottom:28px">A path that never stops. The Becchis Line Beauty Care and Technologies academy provides advanced training on all our technologies — from slimming methods to laser treatments — with practical sessions and professional certification.</p>
+    <ul class="feature-points" style="margin-bottom: 32px;">
+      <li>Advanced hands-on technology training</li>
+      <li>Certified professional qualification</li>
+      <li>Ongoing updates & new techniques</li>
+    </ul>
+    <a href="#" class="btn-green">Explore Training Courses &rarr;</a>
+  </div>
+</section>
+
+<!-- FRANCHISING CTA -->
+<div class="franchising-cta fade-up">
+  <div>
+    <p class="franchising-cta-tag">Business Opportunity</p>
+    <h2 class="franchising-cta-title">Become a Sanybei Center</h2>
+    <p class="franchising-cta-sub">Practical experience and professional support for those who want to stand out in the aesthetics market. Join our growing network of certified beauty centers.</p>
+  </div>
+  <a href="#" class="btn-red">Discover Advantages &rarr;</a>
+</div>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <div>
+    <p class="newsletter-label">Stay Connected</p>
+    <h2 class="newsletter-title">Subscribe for Offers & Updates</h2>
+    <p class="newsletter-sub">Be the first to know about new technologies, exclusive promotions, and professional training opportunities.</p>
+  </div>
+  <div>
+    <div class="newsletter-form">
+      <input class="newsletter-input" type="email" placeholder="Your email address">
+      <button class="newsletter-btn">Subscribe</button>
+    </div>
+    <p style="font-size:12px; color:rgba(255,255,255,0.3); margin-top:12px;">By subscribing you agree to our privacy policy. Unsubscribe at any time.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="fade-up">
+    <p class="section-label">Get in Touch</p>
+    <h2 class="section-title" style="margin-bottom:36px">Contact Us</h2>
+    <div class="contact-detail">
+      <div class="contact-icon">&#9679;</div>
+      <div>
+        <p class="contact-detail-label">Address</p>
+        <p class="contact-detail-value">Via Sommariva 31/1<br>10022 Carmagnola (TO), Italy</p>
+      </div>
+    </div>
+    <div class="contact-detail">
+      <div class="contact-icon">&#9742;</div>
+      <div>
+        <p class="contact-detail-label">Phone</p>
+        <p class="contact-detail-value">+39 011 9710730</p>
+      </div>
+    </div>
+    <div class="contact-detail">
+      <div class="contact-icon">&#9993;</div>
+      <div>
+        <p class="contact-detail-label">Email</p>
+        <p class="contact-detail-value">info@becchisline.com</p>
+      </div>
+    </div>
+    <div style="margin-top: 32px; display: flex; gap: 12px;">
+      <a href="https://www.facebook.com/BecchisLine" target="_blank" style="width:40px;height:40px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;font-size:14px;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">f</a>
+      <a href="https://www.instagram.com/becchis_line/" target="_blank" style="width:40px;height:40px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;font-size:14px;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">in</a>
+      <a href="https://www.youtube.com/channel/UC35PEgXb49swmjRVcl8fCeQ" target="_blank" style="width:40px;height:40px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;font-size:14px;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">▶</a>
+    </div>
+  </div>
+  <form class="contact-form fade-up" style="transition-delay:0.12s" onsubmit="submitForm(event)">
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">First Name</label>
+        <input class="form-input" type="text" placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Last Name</label>
+        <input class="form-input" type="text" placeholder="Your surname">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email Address</label>
+      <input class="form-input" type="email" placeholder="email@example.com">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Phone</label>
+      <input class="form-input" type="tel" placeholder="+39 000 0000000">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Message</label>
+      <textarea class="form-input" placeholder="How can we help you?"></textarea>
+    </div>
+    <button type="submit" class="btn-submit">Send Message &rarr;</button>
+    <p id="form-msg" style="font-size:13px;color:var(--green);display:none;margin-top:8px;">Message sent successfully! We'll be in touch soon.</p>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <img class="footer-logo" src="https://www.becchisline.com/wp-content/uploads/2025/10/logo-nuovo-becchis-line-1-225x42.png" alt="Becchis Line">
+      <p class="footer-desc">Becchis Line — since 2007, uniting experience and innovation in wellness and professional aesthetics. Designed and manufactured in Italy.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/BecchisLine" target="_blank" title="Facebook">f</a>
+        <a href="https://www.instagram.com/becchis_line/" target="_blank" title="Instagram">ig</a>
+        <a href="https://www.youtube.com/channel/UC35PEgXb49swmjRVcl8fCeQ" target="_blank" title="YouTube">▶</a>
+        <a href="https://web.whatsapp.com/" target="_blank" title="WhatsApp">w</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Technologies</p>
+      <ul>
+        <li><a href="#">Fisikcelluderm</a></li>
+        <li><a href="#">SANYSAUN</a></li>
+        <li><a href="#">Body Therm Bands</a></li>
+        <li><a href="#">Pressotherapy</a></li>
+        <li><a href="#">Diode Laser</a></li>
+        <li><a href="#">Radiofrequency</a></li>
+        <li><a href="#">Vacuum</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Company</p>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">BL Academy</a></li>
+        <li><a href="#">Franchising</a></li>
+        <li><a href="#">Sanybei Centers</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">Contacts</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Contact</p>
+      <ul>
+        <li><a href="#">Via Sommariva 31/1</a></li>
+        <li><a href="#">10022 Carmagnola (TO)</a></li>
+        <li><a href="tel:+390119710730">+39 011 9710730</a></li>
+        <li><a href="mailto:info@becchisline.com">info@becchisline.com</a></li>
+        <li style="margin-top:16px;"><a href="#">EN</a> &nbsp;|&nbsp; <a href="#">IT</a> &nbsp;|&nbsp; <a href="#">ES</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Copyright &copy; 2026 Becchis Line. All rights reserved.</span>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Cookie Policy</a>
+      <a href="#">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Slider
+  let current = 0;
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  let autoTimer;
+
+  function goToSlide(n) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = n;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    resetTimer();
+  }
+  function nextSlide() { goToSlide((current + 1) % slides.length); }
+  function prevSlide() { goToSlide((current - 1 + slides.length) % slides.length); }
+  function resetTimer() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(nextSlide, 5500);
+  }
+  resetTimer();
+
+  // Scroll animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Mobile menu stub
+  function toggleMenu() {}
+
+  // Form
+  function submitForm(e) {
+    e.preventDefault();
+    const msg = document.getElementById('form-msg');
+    msg.style.display = 'block';
+    setTimeout(() => msg.style.display = 'none', 5000);
+  }
+</script>
+</body>
+</html>
